@@ -3,3 +3,38 @@
 ## Lesson Notes
 
 ### Day 1
+
+Key Points: Playing audio, event listeners, data attributes
+
+**Setup**
+
+The document was pre-setup with the styling in place, as well as some HTML elements that contained some key infrastructure. Namely...
+
+* Divs for the individual "keys"/buttons were set up and formatted properly. They also had a `data-key` attribute set with the correct [keycode](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/keyCode) value.
+* Audio elements with corresponding `data-key` attributes to readily connect to the "keys".
+
+**Part A: Playing Audio**
+
+1. Added a `console.log` to ensure `keydown` events could be properly detected.
+2. Create an [event listener](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) that listens for the `keydown` event.
+3. Select DOM nodes that match the criteria of `audio` element with the [attribute](https://www.w3schools.com/css/css_attribute_selectors.asp) of [`data-key`](https://www.w3schools.com/tags/att_global_data.asp). Since we're taking in the `data-key` dynamically, we use ES6 template strings.
+4. A `null` is returned if there is no corresponding key. To prevent this, add an `if` statement and stop the function from running.
+5. You can use [`.play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play) and the `audio` `const` that was just defined.
+6. Because the `.play()` method won't replay a sound that's already playing, sounds won't play on every `keydown`. To bypass this, the [`currentTime`](https://www.w3schools.com/tags/av_prop_currenttime.asp) is set to 0, effectively rewinding the audio clip.
+
+**Part B: Adding the Animation**
+
+1. Select DOM nodes that match the criteria of the `key` class as well as the `keyCode` `data-key` attribute
+2. Add the class of `playing` to items that match that criteria by using [`classList.add()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/classList) (this is the vanilla JS equivalent to jQuery's [`addClass`](https://api.jquery.com/addclass/)).
+
+**Part C: Finishing the Animation**
+
+1. Use a `forEach` statement to add an event listener to all the items selected with the query selector in the `keys` constant.
+2. Since there's multiple `transitionend` events (many properties transitioned), an `if` statement is added to check and see if the property is `transform` (this is so no elements that don't transform, are left unaffected).
+3. Use the `this` keyword (which is bound to the `.key` class elements now) to remove the `playing` class.
+
+* You could technically take out the `.playing` class with JavaScript using [`setTimeout`](https://www.w3schools.com/jsref/met_win_settimeout.asp), but this is not scalable in the long run because the `setTimeout` value needs to be changed at the same time as the CSS.
+* A `forEach` is used instead of an Event Listener, because event listeners can't iterate on Node lists.
+* Check what `this` is equal to by just `console.log`ing it (`this` is always what's equal to what's called against it).
+
+**Extra: Adding click functionality**
