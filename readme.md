@@ -38,3 +38,25 @@ The document was pre-setup with the styling in place, as well as some HTML eleme
 * Check what `this` is equal to by just `console.log`ing it (`this` is always what's equal to what's called against it).
 
 **Extra: Adding click functionality**
+
+### Day 2
+
+**Setup**
+
+**Part A: Get Ready for Rotation**
+
+1. Adding a [`rotate`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotate) to the hands makes it rotate, but on the center of the element. To fix this, use [`transform-origin`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin) to move the origin all the way to the right-hand side.
+2. Set the default time to "12 o'clock" by setting a rotation right off the bat.
+3. Add a [`transition`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition) to make the hand actually move and not jerk around. Using a `cubic-bezier` with [`transition-timing-function`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) will simulate a clock hand ticking.
+
+**Part B: Add JavaScript to Update the Hands**
+
+1. Test that updating an element once every second will work by creating a function and using [`setInterval`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) on it.
+2. Test that seconds can be accessed correctly by using the JavaScript [`Date()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object and the [`getSeconds()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getSeconds) method. Console.log out the seconds to ensure it's working.
+3. Convert the seconds into degrees by dividing the seconds by 60 to get the percentage, then multiply that number by 360 to get the degrees the clock hand should be set to. Add 90 degrees to that to offset the initial 90 degrees.
+4. Select the clock second hand by using a `querySelector` and then set the `transform` property to dynamically update via the interval function (ES6 template literals can be utilized to make this as easier job).
+5. Divide by 60 for the minute degrees and divide by 12 for the hours degrees
+
+**Part C: Fix the Hand Reverse Looping Animation**
+
+1. Use an `if` statement to remove the transition.
